@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- 整个页面的开始 -->
+<html lang="en">
+<!-- lang参数告诉浏览器网页所使用的语言与地区 -->
+<!-- 参数有：en-US、en、zh-CN-->
+
+<head>
+    <!-- <head> 元素是所有头部元素的容器。<head> 元素必须包含文档的标题（title），可以包含脚本、样式、meta 信息 以及其他更多的信息。 -->
+    <!-- meta标签：也被称为元数据，是用来告诉浏览器一些关于网页的基本数据 -->
+    <!-- 页面的编码字符集 -->
+    <meta charset="UTF-8">
+    <!-- 把 X-UA-Compatible 属性关联到 HTTP 头部而且值为：IE=edge -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 把 viewport 属性关联到 HTTP 头部而且值为：width=device-width, initial-scale=1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 页面的标题 -->
+    <title>Document</title>
+</head>
+
+<!-- 网页文件正文标签 -->
+<!-- <body> 标签定义文档的主体。 -->
+<!-- <body> 元素包含文档的所有内容（比如文本、超链接、图像、表格和列表等等）。 -->
+
+<body>
+    <!-- h系列标签表示标题 -->
+    <h1>1</h1>
+    <!-- p标签表示一个段落 -->
+    <p>123456</p>
+    <!-- 换行标签 -->
+    <br />
+    <!-- 横线标签 -->
+    <hr>
+    <!-- 标记一个新的区域，将里面的元素和外部分割 -->
+    <div>
+        dwyubduhw
+    </div>
+    <!-- span将一行进行分割 -->
+    我是<span>整体</span>的一行
+    <!-- blockquote引用标签在网页内容中间划分展示大段文本，浏览器会对该标签前后自动添加换行符和外边距-->
+    <blockquote>
+        <!-- strong 文字加粗标签 -->
+        <strong>千金散去还复来</strong>
+        <!-- em 文字倾斜标签 -->
+        <em>天生我材必有用</em>
+    </blockquote>
+    <!-- 图片引入标签 -->
+    <img src="https://cos.ap-guangzhou.myqcloud.com/myimages-1305160569/images/pexels-mikka-1025990.jpg">
+    <!-- 标签视频控件 -->
+    <video
+        src="https://cos.ap-guangzhou.myqcloud.com/myimages-1305160569/images/3135074881.mp4?q-sign-algorithm=sha1&q-ak=AKID5a0kEmxM25M4SzIKz1ZlU5uVJkECYmMJ&q-sign-time=1650620616;1650627816&q-key-time=1650620616;1650627816&q-header-list=&q-url-param-list=&q-signature=1878a21f479f12cc127b223e61b93166a53d95dc&x-cos-security-token=aaad7d773c9cfec2947e9c692a0e6aebfeb2182720001"
+        controls="controls"></video><br>
+    <!-- 音频控件标签 -->
+    <audio
+        src="https://cos.ap-guangzhou.myqcloud.com/myimages-1305160569/images/3135074881.mp4?q-sign-algorithm=sha1&q-ak=AKID5a0kEmxM25M4SzIKz1ZlU5uVJkECYmMJ&q-sign-time=1650620616;1650627816&q-key-time=1650620616;1650627816&q-header-list=&q-url-param-list=&q-signature=1878a21f479f12cc127b223e61b93166a53d95dc&x-cos-security-token=aaad7d773c9cfec2947e9c692a0e6aebfeb2182720001"
+        controls="controls"></audio>
+    <br>
+    <!-- 连接标签 target="_blank" 在新的页面打开，默认在当前页打开 -->
+    <a href="https://muqingcloud.space/" target="_blank">没有</a>
+    <!-- 无序列表 -->
+    <ul>
+        <li>222</li>
+        <li>222</li>
+        <li>222</li>
+    </ul>
+    <ul>
+        <li>222</li>
+        <li>222</li>
+        <li>222</li>
+        <li>222</li>
+    </ul>
+    <!-- 有序列表 -->
+    <ol>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+    </ol>
+    <!-- 自定义列表 dd标签会有缩进，dt标签直接顶格 -->
+    <dl>
+        <dt>111</dt>
+        <dd>222</dd>
+        <dt>111</dt>
+        <dd>222</dd>
+        <dt>111</dt>
+        <dd>222</dd>
+        <dt>111</dt>
+        <dd>222</dd>
+        <dt>111</dt>
+        <dd>222</dd>
+    </dl>
+    <!-- html表格 -->
+    <table border="1">
+        <tr>
+            <th>表头1</th>
+            <th>表头2</th>
+        </tr>
+        <tr>
+            <td>row 1, cell 1</td>
+            <td>row 1, cell 2</td>
+        </tr>
+        <tr>
+            <td>row 2, cell 1</td>
+            <td>row 2, cell 2</td>
+        </tr>
+    </table>
+    <hr>
+
+    <!-- html 表单 -->
+    <form>
+        输入框：<input><br>
+        文本框：<textarea></textarea><br>
+        <!-- 为输入框绑定值 -->
+        <label for="value1">value1</label>
+        <input type="radio" name="value1" id="value1" value="value1"><br>
+        <label for="value2">value2</label>
+        <input type="radio" name="value2" id="value2" value="value2"><br>
+        <!-- 表单元素分组，标签会在相关表单元素周围绘制边框 -->
+        <fieldset>
+            <!-- <legend> 标签为 <fieldset> 元素定义标题 -->
+            <legend>Personalia:</legend>
+            Name: <input type="text"><br>
+            Email: <input type="text"><br>
+            Date of birth: <input type="text">
+        </fieldset>
+        <br>
+        <!-- 下拉选择列表 -->
+        <select>
+            <!-- <optgroup> 标签经常用于把相关的选项组合在一起 -->
+            <optgroup label="Swedish Cars">
+                <!-- <option> 标签定义下拉列表中的一个选项（一个条目） -->
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+            </optgroup>
+            <optgroup label="German Cars">
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </optgroup>
+        </select>
+        <br>
+        <!-- 定义按钮 -->
+        <button type="submit" value="提交">提交</button>
+        <button type="reset" value="重置">重置</button>
+    </form>
+
+</body>
+
+</html>
