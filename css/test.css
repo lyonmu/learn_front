@@ -1,0 +1,91 @@
+/* 通配符选择器,消除页面默认的边距 */
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* 元素选择器 */
+body {
+    background-color: bisque;
+}
+
+/* class选择器 */
+.testdiv {
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+}
+
+/* id 选择器 */
+#testdiv01 {
+    background-color: rgb(255, 0, 85);
+    width: 100px;
+    height: 100px;
+}
+
+/* 后代选择器 */
+.testdiv div {
+    background-color: rgb(238, 243, 243);
+    width: 50px;
+    height: 50px;
+}
+
+/* 子元素选择器,也可称为直接后代选择器,此类选择器只能匹配到直接后代，不能匹配到深层次的后代元素 */
+.testdiv>#child {
+    background-color: rgb(95, 97, 97);
+    width: 50px;
+    height: 50px;
+}
+
+.brodiv {
+    background-color: rgb(4, 8, 8);
+    width: 100px;
+    height: 100px;
+}
+
+/* 相邻兄弟选择器,它只会匹配紧跟着的兄弟元素 */
+.brodiv+.brodiv01 {
+    background-color: rgb(18, 84, 84);
+    width: 100px;
+    height: 100px;
+}
+
+/*通用兄弟选择器 它会匹配所有的兄弟元素(不需要紧跟)*/
+.brodiv~div {
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+}
+
+/*选择器分组,此处的逗号我们称之为结合符*/
+h1,
+h2,
+h3 {
+    color: pink;
+}
+
+.block01 {
+    width: 100px;
+    top: 0px;
+}
+
+.block02 {
+    position: relative;
+    border-width: 0ch;
+    width: 100px;
+    margin-top: 0ch;
+
+    left: 200px;
+    top: -800px;
+    background-color: aliceblue;
+}
+
+/* 属性选择器 */
+
+[name] {
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    border: 1px solid;
+}
