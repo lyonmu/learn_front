@@ -111,6 +111,46 @@ Vue 中文官网:https://cn.vuejs.org/
 
    </script>
    ```
+4. v-on:为事件绑定对应函数
+   ```html
+    <body>
+        <div id="root">
+            <h1>{{message}}</h1>
+            <button v-on:click="handle">事件绑定 1</button><br>
+            <button @click="handle">事件绑定 2</button><br>
+            <button @click="func">事件绑定 3</button><br>
+            <button @click="func01($event,55)">事件绑定 4</button>
+        </div>
+
+        <script>
+            Vue.config.productionTip = false;
+            new Vue({
+                el: '#root',
+                data() {
+                    return {
+                        message: '事件处理'
+                    }
+                },
+                methods: {
+                    handle() {
+                        alert('事件响应函数!!!')
+                    },
+                    func(e) {
+                        console.log('获取事件对象');
+                        console.log(e);
+                        alert('获取事件对象')
+                    },
+                    func01(e,number){
+                            console.log('获取事件对象和值');
+                        console.log(e);
+                        console.log(number);
+                        alert('获取事件对象')
+                    }
+                },
+            });
+        </script>
+    </body>
+   ```
 
 ### MVVM模型
 
@@ -121,4 +161,3 @@ Vue 中文官网:https://cn.vuejs.org/
 - VM:视图模型(ViewModel)==> `Vue 实例对象`
 
   <img src="https://myimages-1305160569.cos.ap-guangzhou.myqcloud.com//images/202204241907446.png" alt="20190218151740267" style="zoom:100%;" />
-###

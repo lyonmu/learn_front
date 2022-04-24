@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../localjs/vue.js"></script>
+    <style>
+        *{
+            margin-top: 2opx;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{message}}</h1><br>
+        <a href="https://muqingcloud.space" @click="func01">点我跳转</a><br>
+        <!-- Vue 禁用默认事件的写法,即为事件修饰符 -->
+        <a href="https://muqingcloud.space" @click.prevent="func02">点我跳转</a>
+
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    message: '事件修饰符'
+                }
+            },
+            methods: {
+                func01(e) {
+                    e.preventDefault(); // js原生禁用默认事件写法
+                    alert("跳转网页");
+                },
+                func02(e) {
+                    alert("事件修饰符");
+                }
+            },
+        });
+    </script>
+
+</body>
+
+</html>
