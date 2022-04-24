@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script type="text/javascript" src="../localjs/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <h1>hello {{name}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        // 关闭 Vue 的开发版的提示
+        Vue.config.productionTip = false;
+        // 创建 Vue 实例对象
+        new Vue({
+            el: '#root',// el指定当前 Vue 实例为那个容器服务,值通常是 css 选择器的字符串
+            data: { // data 以对象的形式存储数据,数据供 el 所指定的容器去使用
+                name: 'uqingu'
+            }
+        });
+    </script>
+</body>
+
+</html>

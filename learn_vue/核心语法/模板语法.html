@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../localjs/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <h1>插值语法</h1>
+        <h2>hello {{name}}</h2>
+        <h1>指令语法</h1>
+        <a v-bind:href="url">点我跳转1</a>
+        <a :[href]="url">点我跳转2</a>
+    </div>
+    <script type="text/javascript">
+        // 关闭 Vue 的开发版的提示
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#demo',
+            data: {
+                name: 'java',
+                href: 'href',
+                url: 'https://muqingcloud.space'
+            }
+        });
+
+    </script>
+</body>
+
+</html>
