@@ -67,12 +67,58 @@ Vue 中文官网:https://cn.vuejs.org/
    ```vue
    <!-- 完整语法 -->
    <a v-bind:href="url">...</a>
-   
+
    <!-- 缩写 -->
    <a :href="url">...</a>
-   
+
    <!-- 动态参数的缩写 (2.6.0+) -->
    <a :[key]="url"> ... </a>
    ```
 
-   
+2. v-model:实现双向数据绑定,只能用于表单类元素,建议与表单类的元素 value 属性绑定
+
+   ```html
+   <div id="root">
+      单项数据绑定:<input type="text" :value="name"><br>
+      双向数据绑定:<input type="text" v-model:value="test">
+      <!-- 简写形式 -->
+      双向数据绑定:<input type="text" v-model="test">
+   </div>
+   ```
+
+3. el与data的两种写法
+
+   ```html
+   <div id="root">
+       <h1>{{name}}</h1>
+   </div>
+   <script>
+       Vue.config.productionTip = false;
+       const v = new Vue({
+           // el:'#root', //第一种方法
+           // data: {  // 第一种写法对象式
+           //     name: 'test'
+           // }
+           data() { // 第二种写法函数式
+               return {
+                   name: 'test'
+               }
+           },
+       })
+       setTimeout(() => {
+           v.$mount('#root'); // 第二种方法
+       }, 1000);
+
+   </script>
+   ```
+
+### MVVM模型
+
+- M:模型(Model)==> `对应 data 中的数据`
+
+- V:视图(View)==> `模板`
+
+- VM:视图模型(ViewModel)==> `Vue 实例对象`
+
+  <img src="https://myimages-1305160569.cos.ap-guangzhou.myqcloud.com//images/202204241907446.png" alt="20190218151740267" style="zoom:100%;" />
+###
