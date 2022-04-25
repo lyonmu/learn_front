@@ -153,8 +153,9 @@ Vue 中文官网:https://cn.vuejs.org/
    ```
 5. 事件修饰符
    事件修饰符支持级联书写
-    - prevent：阻止默认事件（常用）；
-	- stop：阻止事件冒泡（常用）；
+   
+	 - prevent：阻止默认事件（常用）；
+   - stop：阻止事件冒泡（常用）；
     - once：事件只触发一次（常用）；
     - capture：使用事件的捕获模式；
     - self：只有event.target是当前操作的元素时才触发事件；
