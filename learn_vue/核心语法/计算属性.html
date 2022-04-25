@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../localjs/vue.js"></script>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root">
+        <h1>姓名 插值语法 实现</h1>
+        姓:<input type="text" v-model="firstName"><br>
+        名:<input type="text" v-model="lastName"><br>
+        <br>
+        全名:<span>{{firstName}}_{{lastName}}</span>
+        <br>
+        <h1>姓名 methods 实现</h1>
+
+        姓:<input type="text" v-model="firstName"><br>
+        名:<input type="text" v-model="lastName"><br>
+        <br>
+        全名:<span>{{fullName()}}</span>
+        <br>
+        <h1>姓名 计算属性 实现</h1>
+
+        姓:<input type="text" v-model="firstName"><br>
+        名:<input type="text" v-model="lastName"><br>
+        <br>
+        全名:<span>{{fullNameComputed}}</span>
+
+        <h1>姓名 计算属性 简写</h1>
+
+        姓:<input type="text" v-model="firstName"><br>
+        名:<input type="text" v-model="lastName"><br>
+        <br>
+        全名:<span>{{fullNameComputed02}}</span>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    firstName: '张',
+                    lastName: '三',
+                }
+            },
+            methods: {
+                fullName() {
+                    return this.firstName + '_' + this.lastName
+                }
+            },
+            computed: {
+                fullNameComputed: {
+                    //get有什么作用？当有人读取fullName时，get就会被调用，且返回值就作为fullName的值
+                    //get什么时候调用？1.初次读取fullName时。2.所依赖的数据发生变化时。
+                    get() {
+                        console.log('get')
+                        return this.firstName + '_' + this.lastName;
+                    },
+                    //set什么时候调用? 当fullName被修改时。
+                    set(value) {
+                        console.log('set', value)
+                        const arr = value.split('_')
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                },
+                // 简写形式
+                fullNameComputed02: {
+                    get() {
+                        console.log('get被调用了');
+                        return this.firstName + '-' + this.lastName;
+                    }
+
+                }
+            },
+        });
+
+    </script>
+
+</body>
+
+</html>
