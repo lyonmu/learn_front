@@ -108,7 +108,7 @@ Vue 中文官网:https://cn.vuejs.org/
        setTimeout(() => {
            v.$mount('#root'); // 第二种方法
        }, 1000);
-
+   
    </script>
    ```
 4. v-on:为事件绑定对应函数
@@ -121,7 +121,7 @@ Vue 中文官网:https://cn.vuejs.org/
             <button @click="func">事件绑定 3</button><br>
             <button @click="func01($event,55)">事件绑定 4</button>
         </div>
-
+   
         <script>
             Vue.config.productionTip = false;
             new Vue({
@@ -160,6 +160,26 @@ Vue 中文官网:https://cn.vuejs.org/
     - self：只有event.target是当前操作的元素时才触发事件；
     - passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
 6. 键盘事件
+	- Vue中常用的按键别名：
+        回车 => enter
+        删除 => delete (捕获“删除”和“退格”键)
+        退出 => esc
+        空格 => space
+        换行 => tab (特殊，必须配合keydown去使用)
+        上 => up
+        下 => down
+        左 => left
+        右 => right
+
+    - Vue未提供别名的按键，可以使用按键原始的key值去绑定，但注意要转为kebab-case（短横线命名）
+
+    - 系统修饰键（用法特殊）：ctrl、alt、shift、meta
+                (1).配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发。
+                (2).配合keydown使用：正常触发事件。
+
+    - 也可以使用keyCode去指定具体的按键（不推荐）
+
+    - Vue.config.keyCodes.自定义键名 = 键码，可以去定制按键别名
 
 ### MVVM模型
 
