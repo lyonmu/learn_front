@@ -153,7 +153,7 @@ Vue 中文官网:https://cn.vuejs.org/
    ```
 5. 事件修饰符
    事件修饰符支持级联书写
-   
+
 	 - prevent：阻止默认事件（常用）；
    - stop：阻止事件冒泡（常用）；
     - once：事件只触发一次（常用）；
@@ -191,3 +191,233 @@ Vue 中文官网:https://cn.vuejs.org/
 - VM:视图模型(ViewModel)==> `Vue 实例对象`
 
   <img src="https://myimages-1305160569.cos.ap-guangzhou.myqcloud.com//images/202204241907446.png" alt="20190218151740267" style="zoom:100%;" />
+
+### 计算属性 computed
+
+1. 定义：要用的属性不存在，要通过已有属性计算得来。
+2. 原理：底层借助了Objcet.defineproperty方法提供的getter和setter。
+3. get函数什么时候执行？
+   1. 初次读取时会执行一次。
+   2. 当依赖的数据发生改变时会被再次调用。
+4. 优势：与methods实现相比，内部有缓存机制（复用），效率更高，调试方便。
+5. 备注：
+   1. 计算属性最终会出现在vm上，直接读取使用即可。
+   2. 如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
+
+
+```html
+<div id="root">
+    <h1>姓名 插值语法 实现</h1>
+    姓:<input type="text" v-model="firstName"><br>
+    名:<input type="text" v-model="lastName"><br>
+    <br>
+    全名:<span>{{firstName}}_{{lastName}}</span>
+    <br>
+    <h1>姓名 methods 实现</h1>
+
+    姓:<input type="text" v-model="firstName"><br>
+    名:<input type="text" v-model="lastName"><br>
+    <br>
+    全名:<span>{{fullName()}}</span>
+    <br>
+    <h1>姓名 计算属性 实现</h1>
+
+    姓:<input type="text" v-model="firstName"><br>
+    名:<input type="text" v-model="lastName"><br>
+    <br>
+    全名:<span>{{fullNameComputed}}</span>
+
+    <h1>姓名 计算属性 简写</h1>
+
+    姓:<input type="text" v-model="firstName"><br>
+    名:<input type="text" v-model="lastName"><br>
+    <br>
+    全名:<span>{{fullNameComputed02}}</span>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstName: '张',
+                lastName: '三',
+            }
+        },
+        methods: {
+            fullName() {
+                return this.firstName + '_' + this.lastName
+            }
+        },
+        computed: {
+            fullNameComputed: {
+                //get有什么作用？当有人读取fullName时，get就会被调用，且返回值就作为fullName的值
+                //get什么时候调用？1.初次读取fullName时。2.所依赖的数据发生变化时。
+                get() {
+                    console.log('get')
+                    return this.firstName + '_' + this.lastName;
+                },
+                //set什么时候调用? 当fullName被修改时。
+                set(value) {
+                    console.log('set', value)
+                    const arr = value.split('_')
+                    this.firstName = arr[0]
+                    this.lastName = arr[1]
+                }
+            },
+            // 简写形式
+            fullNameComputed02: {
+                get() {
+                    console.log('get被调用了');
+                    return this.firstName + '-' + this.lastName;
+                }
+
+            }
+        },
+    });
+
+</script>
+```
+
+### 监视属性 watch
+
+- 监视属性watch：
+  1. 当被监视的属性变化时, 回调函数自动调用, 进行相关操作
+  2. 监视的属性必须存在，才能进行监视！！
+  3. 监视的两种写法：
+     1. new Vue时传入watch配置
+     2. 通过vm.$watch监视
+- computed和watch之间的区别：
+  1. computed能完成的功能，watch都可以完成。
+  2. watch能完成的功能，computed不一定能完成，例如：watch可以进行异步操作。
+- 两个重要的小原则：
+  1. 所被Vue管理的函数，最好写成普通函数，这样this的指向才是vm 或 组件实例对象。
+  2. 所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等、Promise的回调函数），最好写成箭头函数，这样this的指向才是vm 或 组件实例对象。
+
+```html
+<div id="root">
+    <h1>计算属性实现</h1>
+    <h2>今天天气很{{info}}</h2>
+    <!-- 绑定事件的时候：@xxx="yyy" yyy可以写一些简单的语句 -->
+    <!-- <button @click="isHot = !isHot">切换天气</button> -->
+    <button @click="changeWeather">切换天气</button>
+    <h1>监视属性实现</h1>
+    <h2>今天天气很{{info}}</h2>
+    <button @click="changeWeather">切换天气</button>
+
+    <h1>深度监视实现</h1>
+    <h2>a:{{numbers.a}}</h2>
+    <h2>b:{{numbers.a1.b}}</h2>
+    <h2>c:{{numbers.a1.b1.c}}</h2>
+    <h2>d:{{numbers.a1.b1.c1.d}}</h2>
+    <button style="width: 40px; height :30px" @click="changea">a++</button>
+    <button style="width: 40px; height :30px" @click="changeb">b++</button>
+    <button style="width: 40px; height :30px" @click="changec">c++</button>
+    <button style="width: 40px; height :30px" @click="changed">d++</button>
+    <br /><br />
+    <h1>姓名监视实现</h1>
+    姓：<input type="text" v-model="firstName"> <br /><br />
+    名：<input type="text" v-model="lastName"> <br /><br />
+    全名：<span>{{fullName}}</span> <br /><br />
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                isHot: true,
+                numbers: {
+                    a: 0,
+                    a1: {
+                        b: 0,
+                        b1: {
+                            c: 0,
+                            c1: {
+                                d: 0
+                            }
+                        }
+                    }
+                },
+                firstName: '张',
+                lastName: '三',
+                fullName: '张-三'
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            },
+            changea() {
+                console.log('changea')
+                this.numbers.a++;
+            },
+            changeb() {
+                console.log('changeb')
+                this.numbers.a1.b++;
+            },
+            changec() {
+                console.log('changec')
+                this.numbers.a1.b1.c++;
+            },
+            changed() {
+                console.log('changed')
+                this.numbers.a1.b1.c1.d++;
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        watch: {
+            /* isHot: {
+                immediate: true, //初始化时让handler调用一下
+                //handler什么时候调用？当isHot发生改变时。
+                handler(newValue, oldValue) {
+                    console.log('isHot被修改了构造参数', newValue, oldValue)
+                }
+            }, */
+            //简写
+            isHot(newValue, oldValue) {
+                console.log('isHot被修改了', newValue, oldValue, this)
+            },
+            //监视多级结构中某个属性的变化
+            'numbers.a': {
+                handler(newValue, oldValue) {
+                    console.log('a++', newValue, oldValue)
+                }
+            },
+            //监视多级结构中所有属性的变化
+            numbers: {
+                deep: true,
+                handler() {
+                    console.log('numbers改变了')
+                }
+            },
+            firstName(val) {
+                setTimeout(() => {
+                    console.log('输入的姓:' + val)
+                    this.fullName = val + '-' + this.lastName
+                }, 1000);
+            },
+            lastName(val) {
+                console.log('输入的名:' + val)
+                this.fullName = this.firstName + '-' + val
+            }
+        },
+    });
+
+    vm.$watch('isHot', {
+        immediate: true, //初始化时让handler调用一下
+        //handler什么时候调用？当isHot发生改变时。
+        handler(newValue, oldValue) {
+            console.log('isHot被修改了vm监视', newValue, oldValue)
+        }
+    })
+</script>
+```
+
+
+
