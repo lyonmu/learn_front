@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <button onclick="testGet()">GET请求</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script>
+        function testGet() {
+            axios.get('http://192.168.0.103:8001/classify/gets') // 返回一个数组，数组里有三个对象
+                .then(response => {
+                    console.log('/posts get', response.data)
+                })
+        }
+    </script>
+</body>
+
+</html>
