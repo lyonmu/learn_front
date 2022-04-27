@@ -13,7 +13,13 @@
 <body>
     <div id="root">
 
-        <template v-if="classifys.length != 0">
+        <h2>分类列表</h2>
+        <input type="hidden" v-model="app">
+        <input type="text" v-model="search" placeholder="检索关键字">
+        <button @click="getClassify">开始检索</button>
+        <br><br>
+        <template v-if="filterClassifys.length != 0">
+
             <table border="1">
                 <tr>
                     <th>索引</th>
@@ -22,7 +28,7 @@
                     <th>createtime</th>
                     <th>background</th>
                 </tr>
-                <tr v-for="(item, index) in classifys" :key="index">
+                <tr v-for="(item, index) in filterClassifys" :key="index">
                     <td>{{index}}</td>
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
@@ -31,28 +37,70 @@
                 </tr>
             </table>
         </template>
-        <template v-else="classifys.length == 0">
+        <template v-else="filterClassifys.length == 0">
             <h2>默认数据</h2>
         </template>
-        <button @click="getClassify">点击按钮获取数据</button>
+        <br><br><br><br><br><br>
+
+        <h2>分类列表计算属性</h2>
+        <input type="text" v-model="searchComputed" placeholder="检索关键字">
+        <br><br>
+        <table border="1">
+            <tr>
+                <th>索引</th>
+                <th>id</th>
+                <th>name</th>
+                <th>createtime</th>
+                <th>background</th>
+            </tr>
+            <tr v-for="(item, index) in filter" :key="index">
+                <td>{{index}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.createtime}}</td>
+                <td>{{item.background}}</td>
+            </tr>
+        </table>
+
     </div>
     <script>
         Vue.config.productionTip = false
-
-        const vm = new Vue({
+        new Vue({
             el: '#root',
             data() {
                 return {
-                    classifys: []
+                    app: '',
+                    classifys: [],
+                    filterClassifys: [],
+                    search: '',
+                    searchComputed: ''
                 }
             },
             methods: {
                 getClassify() {
-                    axios.get('http://192.168.0.103:8001/classify/gets') // 返回一个数组，数组里有三个对象
-                        .then(response => {
-                            console.log('获取数据')
-                            this.classifys = response.data
-                        })
+                    this.filterClassifys = this.classifys.filter((c) => {
+                        return c.name.indexOf(this.search) !== -1;
+                    })
+                }
+            },
+            watch: {
+                app: {
+                    immediate: true,
+                    handler() {
+                        axios.get('http://192.168.0.103:8001/classify/gets') // 返回一个数组，数组里有三个对象
+                            .then(response => {
+                                console.log('获取数据')
+                                this.classifys = response.data
+                                this.filterClassifys = this.classifys;
+                            })
+                    }
+                }
+            },
+            computed: {
+                filter() {
+                    return this.classifys.filter((c) => {
+                        return c.name.indexOf(this.searchComputed) !== -1;
+                    })
                 }
             },
         })
