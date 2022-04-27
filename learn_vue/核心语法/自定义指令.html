@@ -12,7 +12,7 @@
 
 <body>
     <div id="root">
-        <h1>自定义指令格式化时间戳</h1>
+        <h1 v-demo>自定义指令格式化时间戳</h1>
         <h2>没有格式化的时间戳:{{time}}</h2>
         <h2>格式化的时间戳: <span v-fmt="time"></span></h2>
     </div>
@@ -26,9 +26,22 @@
                 }
             },
             directives: {
+                // 函数方式
                 fmt(element, binding) {
                     console.log('fmt')
                     element.innerText = dayjs(binding.value).format('YYYY年MM月DD日 HH:mm:ss')
+                },
+                // 对象方式
+                demo: {
+                    bind() {
+                        console.log("bind 函数")
+                    },
+                    inserted() {
+                        console.log("inserted 函数")
+                    },
+                    updated() {
+                        console.log("updated 函数")
+                    },
                 }
             }
         })

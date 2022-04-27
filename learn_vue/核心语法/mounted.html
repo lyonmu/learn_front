@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../localjs/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1 :style="{opacity}">{{title}}</h1>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    title: '引出生命周期 mounted',
+                    opacity: 1
+                }
+            },
+            methods: {
+
+            },
+            mounted() {
+                console.log("模本挂载完毕!!!")
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) {
+                        this.opacity = 1
+                    }
+                }, 16);
+            },
+        })
+    </script>
+</body>
+
+</html>
