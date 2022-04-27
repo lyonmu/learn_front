@@ -17,6 +17,7 @@
         <input type="hidden" v-model="app">
         <input type="text" v-model="search" placeholder="检索关键字">
         <button @click="getClassify">开始检索</button>
+        <button @click="classifySort">倒序</button>
         <br><br>
         <template v-if="filterClassifys.length != 0">
 
@@ -81,6 +82,9 @@
                     this.filterClassifys = this.classifys.filter((c) => {
                         return c.name.indexOf(this.search) !== -1;
                     })
+                },
+                classifySort(){
+                    this.filterClassifys.reverse();
                 }
             },
             watch: {
