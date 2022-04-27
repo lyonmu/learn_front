@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../localjs/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@0.27.1/dist/axios.min.js"></script>
+    <script src="../localjs/axios.min.js"></script>
+    <script src="../localjs/dayjs.min.js"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                     <td>{{index}}</td>
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.createtime}}</td>
+                    <td>{{getFmtTime(item.createtime)}}</td>
                     <td>{{item.background}}</td>
                 </tr>
             </table>
@@ -58,7 +59,7 @@
                 <td>{{index}}</td>
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.createtime}}</td>
+                <td>{{item.createtime | timeFormater}}</td>
                 <td>{{item.background}}</td>
             </tr>
         </table>
@@ -85,6 +86,9 @@
                 },
                 classifySort(){
                     this.filterClassifys.reverse();
+                },
+                getFmtTime(time) {
+                    return dayjs(time).format('YYYY年MM月DD日 HH:mm:ss')
                 }
             },
             watch: {
@@ -107,6 +111,11 @@
                     })
                 }
             },
+            filters:{
+                timeFormater(value, str = 'YYYY年MM月DD日 HH:mm:ss') {
+                    return dayjs(value).format(str)
+                }
+            }
         })
     </script>
 </body>
