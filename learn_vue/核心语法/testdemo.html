@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../localjs/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.27.1/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+        <template v-if="classifys.length != 0">
+            <table border="1">
+                <tr>
+                    <th>索引</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>createtime</th>
+                    <th>background</th>
+                </tr>
+                <tr v-for="(item, index) in classifys" :key="index">
+                    <td>{{index}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.createtime}}</td>
+                    <td>{{item.background}}</td>
+                </tr>
+            </table>
+        </template>
+        <template v-else="classifys.length == 0">
+            <h2>默认数据</h2>
+        </template>
+        <button @click="getClassify">点击按钮获取数据</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    classifys: []
+                }
+            },
+            methods: {
+                getClassify() {
+                    axios.get('http://192.168.0.103:8001/classify/gets') // 返回一个数组，数组里有三个对象
+                        .then(response => {
+                            console.log('获取数据')
+                            this.classifys = response.data
+                        })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

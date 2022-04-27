@@ -14,4 +14,10 @@ async function getUser() {
   }
 }
 
-getUser();
+async function main() {
+
+  console.log("异步执行主函数")
+  getUser();
+}
+
+main();
