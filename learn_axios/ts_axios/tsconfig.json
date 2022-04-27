@@ -16,7 +16,7 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "typeRoots": [
-      "/learn_axios/ts_axios/node_modules/@types",
+      "node_modules/@types",
       "@types"
     ]
   },

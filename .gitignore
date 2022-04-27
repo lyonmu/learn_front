@@ -105,3 +105,6 @@ dist
 .DS_Store
 bootstrap-5.1.3-examples
 .idea
+
+*-lock.yaml
+package-lock.json
