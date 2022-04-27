@@ -54,7 +54,7 @@
                 <th>createtime</th>
                 <th>background</th>
             </tr>
-            <tr v-for="(item, index) in filter" :key="index">
+            <tr v-for="(item, index) in filter" :key="item.id">
                 <td>{{index}}</td>
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
