@@ -33,22 +33,16 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: "001", title: "编程", done: false },
-        { id: "002", title: "看书", done: true },
-        { id: "003", title: "听歌", done: true },
-        { id: "004", title: "上课", done: false },
-        { id: "005", title: "游戏", done: false },
-      ],
+      todos: JSON.parse(localStorage.getItem("todos")) || [],
     };
   },
   mounted() {
-    var css =`
+    var css = `
             background-image: linear-gradient(to right, orange, purple);
             -webkit-background-clip: text;
             color: white;
             font-size: 15px;
-            border-radius:5px;`
+            border-radius:5px;`;
     console.log("%c我的测试 app", css);
   },
   methods: {
@@ -77,6 +71,14 @@ export default {
       this.todos = this.todos.filter((todo) => {
         return !todo.done;
       });
+    },
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem("todos", JSON.stringify(value));
+      },
     },
   },
 };
