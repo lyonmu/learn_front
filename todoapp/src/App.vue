@@ -1,6 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+    <button @click="isShow = !isShow">显示/隐藏</button>
+    <br>
+    <transition-group
+      appear
+      name="animate__animated animate__bounce"
+      enter-active-class="animate__zoomIn"
+      leave-active-class="animate__zoomOut"
+    >
+      <img v-show="!isShow" key="1" alt="Vue logo" src="./assets/logo.png" />
+      <img v-show="isShow" key="2" alt="Vue logo" src="./assets/logo.png" />
+    </transition-group>
+
     <div class="todo-container">
       <div class="todo-wrap">
         <AppHearder @addTodo="addTodo" />
@@ -19,6 +31,7 @@
 import AppHearder from "./components/AppHearder.vue";
 import AppList from "./components/AppList.vue";
 import AppFooter from "./components/AppFooter.vue";
+import "animate.css";
 
 export default {
   name: "App",
@@ -30,6 +43,7 @@ export default {
   data() {
     return {
       todos: JSON.parse(localStorage.getItem("todos")) || [],
+      isShow: true,
     };
   },
   mounted() {
