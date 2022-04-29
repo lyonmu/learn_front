@@ -24,13 +24,21 @@ export default {
   components: {
     VueMarkdown,
   },
+  methods: {
+    async getOne() {
+      try {
+        const response = await axios.get(
+          "http://192.168.0.103:8001/essay/get/1"
+        );
+        this.value = response.data.data.body;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
   mounted() {
     console.log("页面挂载完毕!!!");
-    axios
-      .get("http://192.168.0.103:8001/essay/get/1") //
-      .then((response) => {
-        this.value = response.data.data.body;
-      });
+    this.getOne();
   },
 };
 </script>
