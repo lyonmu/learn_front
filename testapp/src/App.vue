@@ -5,9 +5,9 @@
     </div>
 
     <div class="test">
-      <div class="markdown-body">
-      <!-- <div > -->
-        <VueMarkdown :source="value" :toc="true"></VueMarkdown>
+      <!-- <div class="markdown-body"> -->
+        <div class="c-html-render" >
+        <VueMarkdown :source="value" ></VueMarkdown>
       </div>
     </div>
   </div>
@@ -16,6 +16,11 @@
 <script>
 import axios from "axios";
 import VueMarkdown from "vue-markdown";
+/* On-demand import */
+import "@corgicoding/theme/dist/normalize.css";
+import "@corgicoding/theme/dist/github.css";
+
+import "@corgicoding/theme";
 
 export default {
   name: "App",
