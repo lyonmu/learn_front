@@ -4,11 +4,7 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <AppHearder @addTodo="addTodo" />
-        <AppList
-          :todos="todos"
-          :checkTodo="checkTodo"
-          :deleteTodo="deleteTodo"
-        />
+        <AppList :todos="todos" />
         <AppFooter
           :todos="todos"
           @checkAllTodo="checkAllTodo"
@@ -37,6 +33,8 @@ export default {
     };
   },
   mounted() {
+    this.$bus.$on("deleteTodo", this.deleteTodo);
+    this.$bus.$on("checkTodo", this.checkTodo);
     var css = `
             background-image: linear-gradient(to right, orange, purple);
             -webkit-background-clip: text;
@@ -80,6 +78,10 @@ export default {
         localStorage.setItem("todos", JSON.stringify(value));
       },
     },
+  },
+  beforeDestroy() {
+    this.$bus.$off("deleteTodo");
+    this.$bus.$off("checkTodo");
   },
 };
 </script>
