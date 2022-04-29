@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <div class="todo-container">
       <div class="todo-wrap">
-        <AppHearder :addTodo="addTodo" />
+        <AppHearder @addTodo="addTodo" />
         <AppList
           :todos="todos"
           :checkTodo="checkTodo"
@@ -11,8 +11,8 @@
         />
         <AppFooter
           :todos="todos"
-          :checkAllTodo="checkAllTodo"
-          :clearAllTodo="clearAllTodo"
+          @checkAllTodo="checkAllTodo"
+          @clearAllTodo="clearAllTodo"
         />
       </div>
     </div>
