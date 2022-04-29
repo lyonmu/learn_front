@@ -1,30 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+  <div>
+    <div id="app">
+      <img alt="Vue logo" src="./assets/logo.png" />
+    </div>
+
     <div class="test">
-      <!-- <mavon-editor
-        v-model="value"
-        :ishljs="true"
-        :toolbarsFlag="false"
-        :subfield="false"
-      /> -->
       <div class="markdown-body">
-        <VueMarkdown :source="value" v-highlight></VueMarkdown>
+      <!-- <div > -->
+        <VueMarkdown :source="value" :toc="true"></VueMarkdown>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import VueMarkdown from "vue-markdown";
 
 export default {
   name: "App",
   data() {
-    return { value: "# 测试标题\n## 测试标题" };
+    return { value: `` };
   },
   components: {
     VueMarkdown,
+  },
+  mounted() {
+    console.log("页面挂载完毕!!!");
+    axios
+      .get("http://192.168.0.103:8001/essay/get/1") //
+      .then((response) => {
+        this.value = response.data.data.body;
+      });
   },
 };
 </script>
@@ -39,7 +46,7 @@ export default {
   margin-top: 60px;
 }
 .test {
-  width: 800px;
+  width: 900px;
   position: absolute;
   top: 300px;
   bottom: 0;
