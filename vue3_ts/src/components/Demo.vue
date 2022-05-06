@@ -6,12 +6,18 @@
         <h1>{{ one.load }}</h1>
         <h1>{{ one.age }}</h1>
         <h1>{{ one.sex }}</h1>
+        <hr>
+        <h1>解构赋值</h1>
+        <h1>{{ id }}</h1>
+        <h1>{{ load }}</h1>
+        <h1>{{ sex }}</h1>
+        <h1>{{ age }}</h1>
         <button @click="testfun">点击修改属性</button>
     </div>
 </template>
 
 <script setup lang='ts'>
-import { reactive, onMounted, onUpdated } from "vue"
+import { reactive, onMounted, onUpdated, toRefs } from "vue"
 defineProps<{ msg: string }>()
 interface user {
     id: string;
@@ -34,6 +40,7 @@ function testfun() {
     one.id = "test"
     one.sex = !one.sex
 }
+let { id, load, age, sex } = toRefs(one)
 </script>
 <style scoped>
 </style>
